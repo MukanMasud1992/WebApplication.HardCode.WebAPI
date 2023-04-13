@@ -1,0 +1,38 @@
+USE HardCodeDb
+
+drop table Categories
+
+CREATE TABLE Categories
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+	Description NVARCHAR(500) NOT NULL,
+    Name NVARCHAR(100) NOT NULL,
+  
+);
+
+USE HardCodeDb
+
+drop table CategoryFields
+
+CREATE TABLE CategoryFields
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    CategoryId INT NOT NULL,
+	Name NVARCHAR (100) NOT NULL,
+	Description NVARCHAR (100) NOT NULL,
+	Foreign key (CategoryId) References Categories(Id) on delete CASCADE
+);
+
+USE HardCodeDb
+
+drop table Products
+
+CREATE TABLE Products
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL,
+	ImageURL NVARCHAR(100),
+    Description NVARCHAR(500) NULL,
+	Price DECIMAL (18,2) NOT NULL,
+    CategoryId INT NOT NULL FOREIGN KEY  REFERENCES Categories(Id)
+);
